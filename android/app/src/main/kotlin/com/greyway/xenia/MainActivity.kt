@@ -1,4 +1,4 @@
-package com.example.xenia
+package com.greyway.xenia
 
 import io.flutter.embedding.android.FlutterActivity
 
