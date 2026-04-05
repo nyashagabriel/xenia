@@ -73,7 +73,7 @@ class XTheme {
       
       // BODY: Poppins (Medium weight for readability)
       bodyLarge: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w500, color: color),
-      bodyMedium: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w400, color: color.withOpacity(0.8)),
+      bodyMedium: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w400, color: color.withValues(alpha: 0.8)),
       
       // LABELS: Action / tracking heavy
       labelLarge: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1.5, color: color),
@@ -86,7 +86,7 @@ class XTheme {
         backgroundColor: XColors.primaryPurple,
         foregroundColor: Colors.white,
         elevation: 12,
-        shadowColor: XColors.primaryPurple.withOpacity(0.3),
+        shadowColor: XColors.primaryPurple.withValues(alpha: 0.3),
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         textStyle: GoogleFonts.poppins(fontWeight: FontWeight.w900, letterSpacing: 2, fontSize: 16),
@@ -94,8 +94,8 @@ class XTheme {
     );
   }
 
-  static CardTheme _buildCardTheme(Brightness brightness) {
-    return CardTheme(
+  static CardThemeData _buildCardTheme(Brightness brightness) {
+    return CardThemeData(
       color: brightness == Brightness.dark ? XColors.surfaceDark : XColors.surfaceLight,
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
@@ -106,7 +106,7 @@ class XTheme {
   static InputDecorationTheme _buildInputDecorationTheme(Brightness brightness) {
     return InputDecorationTheme(
       filled: true,
-      fillColor: brightness == Brightness.dark ? Colors.black.withOpacity(0.3) : Colors.white,
+      fillColor: brightness == Brightness.dark ? Colors.black.withValues(alpha: 0.3) : Colors.white,
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
       contentPadding: const EdgeInsets.all(20),
       hintStyle: GoogleFonts.poppins(color: Colors.grey, fontWeight: FontWeight.w400),

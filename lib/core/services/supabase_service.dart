@@ -35,7 +35,7 @@ class SupabaseService {
   GoTrueClient get auth => client.auth;
 
   /// Shortcut to Postgrest (database queries).
-  PostgrestClient get db => client.from(''); // Default empty reference
+  SupabaseQueryBuilder from(String table) => client.from(table);
 
   /// Shortcut to Realtime logic.
   RealtimeClient get realtime => client.realtime;

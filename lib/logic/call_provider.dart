@@ -4,12 +4,10 @@
 // Logic: Agora RTC Session: Token Fetch -> Join -> State.
 // ============================================================
 
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import '../core/services/supabase_service.dart';
 import '../core/services/agora_service.dart';
-import '../core/constants/x_constants.dart';
 
 enum CallStatus { idle, fetchingToken, joining, connected, error }
 
@@ -28,6 +26,9 @@ class CallProvider extends ChangeNotifier {
 
   String? _error;
   String? get error => _error;
+
+  /// Expose Agora engine for video views.
+  RtcEngine get engine => _agora.engine;
 
   /// Start the Video Session
   Future<void> startCall(String channelName, String userId) async {

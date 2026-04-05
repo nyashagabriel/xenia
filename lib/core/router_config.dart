@@ -4,7 +4,6 @@
 // Core Navigation: GoRouter configuration for the full 11-screen flow.
 // ============================================================
 
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'constants/x_constants.dart';
 

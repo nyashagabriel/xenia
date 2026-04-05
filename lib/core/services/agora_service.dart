@@ -26,8 +26,8 @@ class AgoraService {
     await [Permission.camera, Permission.microphone].request();
 
     // 2. Setup Engine
-    _engine = await createAgoraRtcEngine();
-    await _engine!.initialize(RtcEngineContext(appId: _appId));
+    _engine = createAgoraRtcEngine();
+    _engine!.initialize(RtcEngineContext(appId: _appId));
     
     // 3. Configure Video Settings
     await _engine!.enableVideo();

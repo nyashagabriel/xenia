@@ -38,7 +38,7 @@ class AuthPage extends StatelessWidget {
                       height: 300,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: XColors.primaryPurple.withOpacity(0.15),
+                        color: XColors.primaryPurple.withValues(alpha: 0.15),
                       ),
                     ),
                   ),

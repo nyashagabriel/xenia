@@ -68,7 +68,8 @@ class _XPulseButtonState extends State<XPulseButton>
                     width: 2,
                   ),
                 ),
-                transform: Matrix4.identity()..scaleByDouble(scale),
+                transform: Matrix4.diagonal3Values(scale, scale, 1.0),
+                transformAlignment: Alignment.center,
               );
             },
           );

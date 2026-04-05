@@ -5,7 +5,6 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/services/supabase_service.dart';
 import '../core/constants/x_constants.dart';
 

@@ -54,8 +54,8 @@ class _CallPageState extends State<CallPage> {
             child: call.status == CallStatus.connected
                 ? AgoraVideoView(
                     controller: VideoViewController.remote(
-                      rtcEngine: AgoraService().engine,
-                      canvas: RemoteVideoCanvas(uid: _convertUid(match.partnerId!)),
+                      rtcEngine: call.engine,
+                      canvas: VideoCanvas(uid: _convertUid(match.partnerId!)),
                       connection: RtcConnection(channelId: match.channelName!),
                     ),
                   )
@@ -78,7 +78,7 @@ class _CallPageState extends State<CallPage> {
                 borderRadius: BorderRadius.circular(22),
                 child: AgoraVideoView(
                   controller: VideoViewController(
-                    rtcEngine: context.read<CallProvider>()._agora.engine,
+                    rtcEngine: call.engine,
                     canvas: const VideoCanvas(uid: 0), // 0 is local uid
                   ),
                 ),
@@ -124,7 +124,7 @@ class _CallPageState extends State<CallPage> {
                 GestureDetector(
                   onTap: () async {
                     await call.endCall();
-                    if (mounted) context.go(XRoutes.queue); // Instant next match
+                    if (context.mounted) context.go(XRoutes.queue); // Instant next match
                   },
                   child: Container(
                     height: 80,
@@ -132,7 +132,7 @@ class _CallPageState extends State<CallPage> {
                     decoration: BoxDecoration(
                       color: XColors.primaryPurple,
                       borderRadius: BorderRadius.circular(40),
-                      boxShadow: [BoxShadow(color: XColors.primaryPurple.withOpacity(0.5), blurRadius: 20)],
+                      boxShadow: [BoxShadow(color: XColors.primaryPurple.withValues(alpha: 0.5), blurRadius: 20)],
                     ),
                     child: const Center(
                       child: Text(
@@ -176,4 +176,3 @@ class _CallPageState extends State<CallPage> {
      return int.parse(uuid.substring(0, 8), radix: 16);
   }
 }
-破折号: /* Private engine fix in next step */

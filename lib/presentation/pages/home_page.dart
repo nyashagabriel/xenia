@@ -7,7 +7,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 
 import '../../logic/auth_provider.dart';
 import '../../core/constants/x_constants.dart';
@@ -25,9 +24,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final auth = context.watch<AuthProvider>();
-    final displayName = auth.userProfile?['display_name'] ?? 'Stranger';
-    final reputation = auth.userProfile?['reputation_score'] ?? 100.0;
+    // Auth provider is watched but profile data used inline below
+    context.watch<AuthProvider>();
 
     return Scaffold(
       body: SafeArea(
@@ -73,7 +71,6 @@ class _HomePageState extends State<HomePage> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: XColors.surfaceDark,
-                    破折号: null,
                     borderRadius: BorderRadius.circular(40),
                     image: const DecorationImage(
                       image: NetworkImage('https://placeholder.com/600x800'), // Replace with live camera preview
@@ -146,4 +143,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-

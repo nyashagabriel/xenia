@@ -10,7 +10,6 @@ import 'package:intl/intl.dart';
 
 import '../../logic/auth_provider.dart';
 import '../../logic/history_provider.dart';
-import '../../core/constants/x_constants.dart';
 import '../../core/theme/x_colors.dart';
 import '../widgets/x_glass_card.dart';
 
@@ -66,7 +65,7 @@ class _HistoryPageState extends State<HistoryPage> {
                         padding: const EdgeInsets.all(16),
                         child: Row(
                           children: [
-                            CircleAvatar(radius: 24, backgroundColor: XColors.primaryPurple.withOpacity(0.2), child: Text(partnerName[0], style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
+                            CircleAvatar(radius: 24, backgroundColor: XColors.primaryPurple.withValues(alpha: 0.2), child: Text(partnerName[0], style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
                             const SizedBox(width: 16),
                             Expanded(
                               child: Column(
