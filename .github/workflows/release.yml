@@ -1,0 +1,75 @@
+name: Xenia Release
+
+on:
+  push:
+    tags:
+      - 'v*'  # Triggers on version tags like v1.0.0, v0.2.1-beta, etc.
+
+permissions:
+  contents: write  # Required to create GitHub Releases
+
+jobs:
+  release:
+    name: Build & Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Setup Java (for Android build)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Create .env file
+        run: |
+          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
+          echo "SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env
+          echo "AGORA_APP_ID=${{ secrets.AGORA_APP_ID }}" >> .env
+
+      - name: Run Analyze
+        run: flutter analyze
+
+      # ── Android Release APK ──
+      - name: Build Release APK
+        run: flutter build apk --release --build-name=${{ steps.version.outputs.VERSION }} --build-number=${{ github.run_number }}
+
+      - name: Rename APK
+        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/xenia-${{ steps.version.outputs.VERSION }}.apk
+
+      # ── Web Build ──
+      - name: Build Web
+        run: flutter build web --release --base-href /
+
+      - name: Package Web Build
+        run: |
+          cd build/web
+          zip -r ../../xenia-web-${{ steps.version.outputs.VERSION }}.zip .
+
+      # ── Create GitHub Release ──
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Xenia ${{ steps.version.outputs.VERSION }}
+          tag_name: ${{ github.ref_name }}
+          draft: false
+          prerelease: ${{ contains(github.ref_name, 'beta') || contains(github.ref_name, 'alpha') || contains(github.ref_name, 'rc') }}
+          generate_release_notes: true
+          files: |
+            build/app/outputs/flutter-apk/xenia-${{ steps.version.outputs.VERSION }}.apk
+            xenia-web-${{ steps.version.outputs.VERSION }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
