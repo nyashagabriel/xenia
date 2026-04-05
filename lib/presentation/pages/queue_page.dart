@@ -10,7 +10,6 @@ import 'package:provider/provider.dart';
 
 import '../../logic/auth_provider.dart';
 import '../../logic/match_provider.dart';
-import '../../logic/call_provider.dart';
 import '../../core/constants/x_constants.dart';
 import '../../core/theme/x_colors.dart';
 import '../widgets/x_pulse_button.dart';

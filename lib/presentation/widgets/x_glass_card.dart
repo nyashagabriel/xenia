@@ -40,7 +40,7 @@ class XGlassCard extends StatelessWidget {
             color: color ?? (isDark ? XColors.glassDark : XColors.glassWhite),
             borderRadius: BorderRadius.circular(borderRadius),
             border: border ?? Border.all(
-              color: isDark ? Colors.white.withOpacity(0.05) : Colors.white.withOpacity(0.3),
+              color: isDark ? Colors.white.withValues(alpha: 0.05) : Colors.white.withValues(alpha: 0.3),
               width: 1.5,
             ),
           ),

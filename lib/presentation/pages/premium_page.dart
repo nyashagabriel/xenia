@@ -43,7 +43,7 @@ class PremiumPage extends StatelessWidget {
             _buildPremiumCard(
               title: 'UNLIMITED',
               description: 'Match as much as you want. 24/7 access to the community.',
-              price: '$9.99/mo',
+              price: r'$9.99/mo',
               icon: Icons.all_inclusive,
               color: XColors.primaryPurple,
             ),
@@ -54,7 +54,7 @@ class PremiumPage extends StatelessWidget {
             _buildPremiumCard(
               title: 'THE BOOST',
               description: 'Jump to the front of the queue for 1 hour. Get seen first.',
-              price: '$2.99',
+              price: r'$2.99',
               icon: Icons.bolt,
               isSingle: true,
               color: XColors.accentWarning,
@@ -91,7 +91,7 @@ class PremiumPage extends StatelessWidget {
     return XGlassCard(
       borderRadius: 32,
       padding: const EdgeInsets.all(32),
-      border: Border.all(color: color.withOpacity(0.5), width: 2),
+      border: Border.all(color: color.withValues(alpha: 0.5), width: 2),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

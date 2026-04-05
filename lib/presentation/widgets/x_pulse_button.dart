@@ -41,7 +41,7 @@ class _XPulseButtonState extends State<XPulseButton>
   @override
   void dispose() {
     _controller.dispose();
-    super.initState();
+    super.dispose();
   }
 
   @override
@@ -64,11 +64,11 @@ class _XPulseButtonState extends State<XPulseButton>
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: color.withOpacity(opacity),
+                    color: color.withValues(alpha: opacity),
                     width: 2,
                   ),
                 ),
-                transform: Matrix4.identity()..scale(scale),
+                transform: Matrix4.identity()..scaleByDouble(scale),
               );
             },
           );
@@ -85,7 +85,7 @@ class _XPulseButtonState extends State<XPulseButton>
               color: color,
               boxShadow: [
                 BoxShadow(
-                  color: color.withOpacity(0.5),
+                  color: color.withValues(alpha: 0.5),
                   blurRadius: 30,
                   spreadRadius: 5,
                 ),

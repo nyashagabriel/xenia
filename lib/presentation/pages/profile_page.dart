@@ -71,7 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   // Reputation Shield
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    decoration: BoxDecoration(color: reputation > 80 ? Colors.green.withOpacity(0.1) : Colors.amber.withOpacity(0.1), borderRadius: BorderRadius.circular(100), border: Border.all(color: reputation > 80 ? Colors.green : Colors.amber, width: 1)),
+                    decoration: BoxDecoration(color: reputation > 80 ? Colors.green.withValues(alpha: 0.1) : Colors.amber.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(100), border: Border.all(color: reputation > 80 ? Colors.green : Colors.amber, width: 1)),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [

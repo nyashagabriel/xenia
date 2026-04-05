@@ -58,7 +58,7 @@ class _SplashPageState extends State<SplashPage> {
                 borderRadius: BorderRadius.circular(32),
                 boxShadow: [
                   BoxShadow(
-                    color: XColors.primaryPurple.withOpacity(0.5),
+                    color: XColors.primaryPurple.withValues(alpha: 0.5),
                     blurRadius: 40,
                     spreadRadius: 10,
                   ),
@@ -91,7 +91,7 @@ class _SplashPageState extends State<SplashPage> {
             Text(
               'HOSPITALITY BETWEEN NEW FRIENDS',
               style: TextStyle(
-                color: XColors.primaryPurpleLight.withOpacity(0.8),
+                color: XColors.primaryPurpleLight.withValues(alpha: 0.8),
                 fontSize: 10,
                 fontWeight: FontWeight.w700,
                 letterSpacing: 3,

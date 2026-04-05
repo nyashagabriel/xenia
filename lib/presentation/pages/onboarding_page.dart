@@ -96,6 +96,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     return _BaseStep(
       emoji: '👽',
       title: 'What should we\ncall you?',
+      onAction: _nextPage,
       child: TextField(
         controller: _nameController,
         style: const TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold),
@@ -105,7 +106,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
           filled: false,
         ),
       ),
-      onAction: _nextPage,
     );
   }
 
@@ -113,13 +113,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
     return _BaseStep(
       emoji: '🔞',
       title: 'Wait, are you\n18+ only?',
+      onAction: _ageConfirmed ? _nextPage : null,
       child: SwitchListTile(
         title: const Text('I confirm I am over 18', style: TextStyle(color: Colors.white)),
         value: _ageConfirmed,
         onChanged: (v) => setState(() => _ageConfirmed = v),
-        activeColor: Colors.white,
+        activeThumbColor: Colors.white,
       ),
-      onAction: _ageConfirmed ? _nextPage : null,
     );
   }
 
@@ -127,16 +127,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
     return _BaseStep(
       emoji: '🎥',
       title: 'We need your\nCamera & Mic.',
-      child: const Text(
-        'Xenia is live video. You need camera access to jump in and meet people.',
-        textAlign: TextAlign.center,
-        style: TextStyle(color: Colors.white70),
-      ),
       actionLabel: 'GRANT ACCESS',
       onAction: () async {
         await [Permission.camera, Permission.microphone].request();
         _nextPage();
       },
+      child: const Text(
+        'Xenia is live video. You need camera access to jump in and meet people.',
+        textAlign: TextAlign.center,
+        style: TextStyle(color: Colors.white70),
+      ),
     );
   }
 }
@@ -170,7 +170,7 @@ class _BaseStep extends StatelessWidget {
               width: 100,
               height: 100,
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Center(child: Text(emoji, style: const TextStyle(fontSize: 48))),
