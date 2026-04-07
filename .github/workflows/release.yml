@@ -2,8 +2,13 @@ name: Xenia Release
 
 on:
   push:
+    branches:
+      - main
     tags:
       - 'v*'  # Triggers on version tags like v1.0.0, v0.2.1-beta, etc.
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: write  # Required to create GitHub Releases
@@ -18,7 +23,13 @@ jobs:
 
       - name: Extract version from tag
         id: version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
+            VERSION="${GITHUB_REF#refs/tags/v}"
+          else
+            VERSION="dev-${GITHUB_RUN_NUMBER}"
+          fi
+          echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
 
       - name: Setup Java (for Android build)
         uses: actions/setup-java@v4
@@ -61,6 +72,7 @@ jobs:
 
       # ── Create GitHub Release ──
       - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
           name: Xenia ${{ steps.version.outputs.VERSION }}
